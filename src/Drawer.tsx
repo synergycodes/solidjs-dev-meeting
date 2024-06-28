@@ -4,6 +4,7 @@ import { diagram } from "./diagram-context";
 
 export const Drawer: Component = () => {
   const [selection, setSelection] = createSignal<go.ObjectData[]>([]);
+  const [logger, setLogger] = createSignal(true);
   const nodeSelected = () => !!selection().length;
 
   const listener: go.DiagramEventHandler = (event) => {
@@ -20,11 +21,14 @@ export const Drawer: Component = () => {
 
   return (
     <div class="drawer">
+      <button onClick={() => setLogger(!logger())}>
+        Logging {logger() ? "on" : "off"}
+      </button>
       <Show when={nodeSelected()} fallback={<span>Please select a node</span>}>
         <span>
           First selected key: {JSON.stringify(selection().at(0)?.key)}
         </span>
-        <NodeList nodes={selection()} />
+        <NodeList nodes={selection()} log={logger()} />
       </Show>
     </div>
   );
