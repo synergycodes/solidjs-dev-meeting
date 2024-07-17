@@ -2,7 +2,7 @@ import { For, createEffect, type Component } from "solid-js";
 
 type Props = {
   nodes: go.ObjectData[];
-  log?: boolean;
+  log: boolean;
 };
 
 export const NodeList: Component<Props> = (props) => {
